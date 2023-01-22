@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Grid } from '@mui/material';
 import { Pagination } from '@mui/material';
 
@@ -6,21 +6,24 @@ import { Product } from '../../@types/types';
 import { CardItemMinInfo } from '../CardItemMinInfo';
 import { grapQLClient } from '../../services/graphiqlClient';
 import { gql } from 'graphql-request';
+import { useProduct } from '../../context/ProductContext';
 
 interface AllProductsProps {
-  products: object;
+  initProducts: object;
 }
 
-export const AllProducts = ({ products }: AllProductsProps) => {
-  const [allproducts, setAllProducts] = useState<Product[]>(
-    Object.values(products)[0]
-  );
-  const [currentPage, setCurrentPage] = useState(1);
+export const AllProducts = ({ initProducts }: AllProductsProps) => {
+  const { currentPage, changeCurrentPage, addProducts, products } =
+    useProduct();
+
+  useEffect(() => {
+    if (initProducts) addProducts(Object.values(initProducts)[0]);
+  }, []);
 
   const handlePagined = async (page: number) => {
     const { allProducts } = await grapQLClient.request(gql`
       query {
-        allProducts(page: ${page}) {
+        allProducts(page: ${page},perPage: 12) {
           image_url
           name
           sales
@@ -28,8 +31,7 @@ export const AllProducts = ({ products }: AllProductsProps) => {
       }
     `);
 
-    console.log(allProducts);
-    setAllProducts(allProducts);
+    addProducts(allProducts);
   };
 
   return (
@@ -37,7 +39,6 @@ export const AllProducts = ({ products }: AllProductsProps) => {
       <Box>
         <Box
           style={{
-            border: '1px solid red',
             display: 'flex',
             justifyContent: 'flex-end',
             marginTop: '21px',
@@ -45,10 +46,10 @@ export const AllProducts = ({ products }: AllProductsProps) => {
           }}
         >
           <Pagination
-            count={2}
+            count={3}
             shape="rounded"
             onChange={(_e, value) => {
-              setCurrentPage(value);
+              changeCurrentPage(value);
               handlePagined(value);
             }}
             defaultPage={currentPage}
@@ -62,7 +63,7 @@ export const AllProducts = ({ products }: AllProductsProps) => {
           className=" mx-auto p-0   w-[100%] "
           gap={2}
         >
-          {allproducts.map(({ name, image_url, sales }, index) => (
+          {products.map(({ name, image_url, sales }, index) => (
             <Grid item key={index} className="py-0 px-0">
               <CardItemMinInfo
                 productPrice={`${sales},00`}
@@ -75,7 +76,6 @@ export const AllProducts = ({ products }: AllProductsProps) => {
 
         <Box
           style={{
-            border: '1px solid red',
             display: 'flex',
             justifyContent: 'flex-end',
             marginTop: '21px',
@@ -86,7 +86,7 @@ export const AllProducts = ({ products }: AllProductsProps) => {
             count={2}
             shape="rounded"
             onChange={(_e, value) => {
-              setCurrentPage(value);
+              changeCurrentPage(value);
               handlePagined(value);
             }}
             defaultPage={currentPage}

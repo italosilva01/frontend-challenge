@@ -15,9 +15,7 @@ const Home: NextPage = (props) => {
   const router = useRouter();
   // Call this function whenever you want to
   // refresh props!
-  const refreshData = () => {
-    router.replace(router.asPath);
-  };
+
   return (
     <div className="bg-[#F0F0F5] ">
       <Head>
@@ -26,7 +24,7 @@ const Home: NextPage = (props) => {
       <Header />
       <main className=" w-[90%] m-auto  overflow-auto ">
         <Content>
-          <AllProducts products={props} />
+          <AllProducts initProducts={props} />
         </Content>
       </main>
     </div>
@@ -36,7 +34,7 @@ const Home: NextPage = (props) => {
 export const getServerSideProps: GetServerSideProps = async () => {
   const { allProducts } = await grapQLClient.request(gql`
     query {
-      allProducts(page: 1) {
+      allProducts(page: 1, perPage: 12) {
         image_url
         name
         sales
