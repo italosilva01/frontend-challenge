@@ -1,8 +1,6 @@
 import { useState, MouseEvent } from 'react';
 import { Box, Menu, MenuItem } from '@mui/material';
-import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import { gql } from 'graphql-request';
-import { parseISO, format } from 'date-fns';
 
 import { ListItemTextStyled } from './ListItemTextStyled';
 import { grapQLClient } from '../../services/graphiqlClient';
