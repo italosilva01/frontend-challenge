@@ -3,4 +3,5 @@ export interface Product{
     name:string;
     sales:number;
     price_in_cents:number;
+    created_at:string;
 }   
