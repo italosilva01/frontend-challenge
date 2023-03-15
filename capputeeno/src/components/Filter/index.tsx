@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import React, { useState } from 'react';
 import { Box, Menu, MenuItem } from '@mui/material';
 import { gql } from 'graphql-request';
 
@@ -39,9 +39,7 @@ export const Filter = () => {
       addProducts(
         newProducts.sort((a, b) => (a.created_at > b.created_at ? 1 : -1))
       );
-      return;
-    }
-    if (valueFilter === 'price_in_cents') {
+    } else if (valueFilter === 'price_in_cents') {
       if (order === 'smaller-bigger') {
         addProducts(
           newProducts.sort((prodA, prodB) =>
