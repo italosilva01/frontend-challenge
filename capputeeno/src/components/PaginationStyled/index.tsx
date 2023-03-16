@@ -1,3 +1,7 @@
+import Box from '@mui/material/Box';
+import Pagination from '@mui/material/Pagination';
+import React from 'react';
+
 export const PaginationStyled = () => {
   return (
     <Box

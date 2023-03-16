@@ -1,3 +1,4 @@
+import React from 'react';
 import { Filter } from './Filter';
 import { Content } from './Content';
 import { CardItemMinInfo } from './CardItemMinInfo';

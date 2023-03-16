@@ -1,10 +1,9 @@
-import type { AppProps } from 'next/app'
-import { useState } from 'react';
-import { QueryClient,QueryClientProvider } from 'react-query'
+import type { AppProps } from 'next/app';
+import React, { useState } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
-import 'tailwindcss/tailwind.css'
+import 'tailwindcss/tailwind.css';
 import { ProductProvider } from '../context/ProductContext';
-
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(new QueryClient());
@@ -15,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </ProductProvider>
     </QueryClientProvider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
