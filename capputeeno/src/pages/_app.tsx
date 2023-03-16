@@ -1,5 +1,5 @@
-import type { AppProps } from 'next/app';
 import React, { useState } from 'react';
+import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import 'tailwindcss/tailwind.css';
