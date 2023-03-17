@@ -1,26 +1,37 @@
+import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
-import Pagination from '@mui/material/Pagination';
-import React from 'react';
+import Pagination, { PaginationProps } from '@mui/material/Pagination';
+import { useProduct } from '../../context/ProductContext';
+import { grapQLClient } from '../../services/graphiqlClient';
+import { gql } from 'graphql-request';
 
 export const PaginationStyled = () => {
+  const { currentPage, changeCurrentPage, addProducts } = useProduct();
+
+  const handlePagined = async (page: number) => {
+    const { allProducts } = await grapQLClient.request(gql`
+      query {
+        allProducts(page: ${page},perPage: 24) {
+          image_url
+          name
+          price_in_cents
+        }
+      }
+    `);
+    changeCurrentPage(page);
+    addProducts(allProducts);
+  };
+
   return (
-    <Box
-      style={{
-        border: '1px solid red',
-        display: 'flex',
-        justifyContent: 'flex-end',
-        marginTop: '21px',
-        marginBottom: '21px',
-      }}
-    >
+    <Box>
       <Pagination
         count={2}
         shape="rounded"
         onChange={(_e, value) => {
-          setCurrentPage(value);
+          changeCurrentPage(value);
           handlePagined(value);
         }}
-        defaultPage={currentPage}
+        page={currentPage}
       />
     </Box>
   );

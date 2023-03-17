@@ -4,9 +4,9 @@ import { Pagination } from '@mui/material';
 
 import { Product } from '../../@types/types';
 import { CardItemMinInfo } from '../CardItemMinInfo';
-import { grapQLClient } from '../../services/graphiqlClient';
-import { gql } from 'graphql-request';
+
 import { useProduct } from '../../context/ProductContext';
+import { PaginationStyled } from '../PaginationStyled';
 
 interface AllProductsProps {
   initProducts: object;
@@ -20,20 +20,6 @@ export const AllProducts = ({ initProducts }: AllProductsProps) => {
     if (initProducts) addProducts(Object.values(initProducts)[0]);
   }, []);
 
-  const handlePagined = async (page: number) => {
-    const { allProducts } = await grapQLClient.request(gql`
-      query {
-        allProducts(page: ${page},perPage: 24) {
-          image_url
-          name
-          sales
-        }
-      }
-    `);
-
-    addProducts(allProducts);
-  };
-
   return (
     <>
       <Box>
@@ -45,15 +31,7 @@ export const AllProducts = ({ initProducts }: AllProductsProps) => {
             marginBottom: '21px',
           }}
         >
-          <Pagination
-            count={3}
-            shape="rounded"
-            onChange={(_e, value) => {
-              changeCurrentPage(value);
-              handlePagined(value);
-            }}
-            defaultPage={currentPage}
-          />
+          <PaginationStyled />
         </Box>
 
         <Grid
@@ -83,15 +61,7 @@ export const AllProducts = ({ initProducts }: AllProductsProps) => {
             marginBottom: '21px',
           }}
         >
-          <Pagination
-            count={2}
-            shape="rounded"
-            onChange={(_e, value) => {
-              changeCurrentPage(value);
-              handlePagined(value);
-            }}
-            defaultPage={currentPage}
-          />
+          <PaginationStyled />
         </Box>
       </Box>
     </>
