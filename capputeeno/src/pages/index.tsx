@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       allProducts(page: 1, perPage: 12) {
         image_url
         name
-        sales
+        price_in_cents
       }
     }
   `);

@@ -64,10 +64,10 @@ export const AllProducts = ({ initProducts }: AllProductsProps) => {
           alignItems="center"
           justifyContent="center"
         >
-          {products.map(({ name, image_url, sales }, index) => (
+          {products.map(({ name, image_url, price_in_cents }, index) => (
             <Grid item key={index} md>
               <CardItemMinInfo
-                productPrice={`${sales},00`}
+                productPrice={price_in_cents}
                 imageUrl={image_url}
                 productName={name}
               />
