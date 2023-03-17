@@ -9,12 +9,9 @@ import { Content } from '../components/Content';
 import { Product } from '../@types/types';
 import { grapQLClient } from '../services/graphiqlClient';
 import { AllProducts } from '../components/Content/AllProducts';
-import { Box, Pagination } from '@mui/material';
 
 const Home: NextPage = (props) => {
   const router = useRouter();
-  // Call this function whenever you want to
-  // refresh props!
 
   return (
     <div className="bg-[#F0F0F5] ">

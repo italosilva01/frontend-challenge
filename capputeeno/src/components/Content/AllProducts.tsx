@@ -23,7 +23,7 @@ export const AllProducts = ({ initProducts }: AllProductsProps) => {
   const handlePagined = async (page: number) => {
     const { allProducts } = await grapQLClient.request(gql`
       query {
-        allProducts(page: ${page},perPage: 12) {
+        allProducts(page: ${page},perPage: 24) {
           image_url
           name
           sales
@@ -58,13 +58,14 @@ export const AllProducts = ({ initProducts }: AllProductsProps) => {
 
         <Grid
           container
-          spacing={1}
+          spacing={2}
           columns={{ xs: 4, md: 4 }}
-          className=" mx-auto p-0   w-[100%] "
-          gap={2}
+          className=" mx-auto w-[100%] "
+          alignItems="center"
+          justifyContent="center"
         >
           {products.map(({ name, image_url, sales }, index) => (
-            <Grid item key={index} className="py-0 px-0">
+            <Grid item key={index} md>
               <CardItemMinInfo
                 productPrice={`${sales},00`}
                 imageUrl={image_url}
