@@ -18,26 +18,27 @@ export const CardItemMinInfo = ({
   const numeroComPontoFinal = `${parteInteira}.${parteDecimal}`;
 
   return (
-    <Box className="border rounded bg-white w-[256px] ">
-      <div className="bg-white">
-        <Image src={imageUrl} width={256} height={300} />
-      </div>
-      <div className="h-[4.875rem] bg-white">
-        <div className="py-2 ">
-          <p className="prose-base font-['Saira'] text-base leading-6	   px-3">
-            {productName}
-          </p>
-        </div>
+    <Box className=" rounded-lg bg-white w-[16rem] min-h-min ">
+      <Image
+        src={imageUrl}
+        width={256}
+        height={300}
+        className="border rounded-t-lg"
+      />
+      <Box className="grid px-3 py-2 gap-y-2">
+        <p className="prose-base font-['Saira'] text-base leading-6 ">
+          {productName}
+        </p>
+
         <div className="w-[14.25rem] h-[1px] border border-[DCE2E5] mx-auto" />
-        <div className="">
-          <p className="font-bold px-3">
-            {Number(numeroComPontoFinal).toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-            })}
-          </p>
-        </div>
-      </div>
+
+        <p className="font-bold ">
+          {Number(numeroComPontoFinal).toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          })}
+        </p>
+      </Box>
     </Box>
   );
 };

@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { Box, Grid } from '@mui/material';
-import { Pagination } from '@mui/material';
 
-import { Product } from '../../@types/types';
 import { CardItemMinInfo } from '../CardItemMinInfo';
 
 import { useProduct } from '../../context/ProductContext';
@@ -13,8 +11,7 @@ interface AllProductsProps {
 }
 
 export const AllProducts = ({ initProducts }: AllProductsProps) => {
-  const { currentPage, changeCurrentPage, addProducts, products } =
-    useProduct();
+  const { addProducts, products } = useProduct();
 
   useEffect(() => {
     if (initProducts) addProducts(Object.values(initProducts)[0]);

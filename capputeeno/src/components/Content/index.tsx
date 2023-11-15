@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import { Box } from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import { Tab } from '../Tab';
 import { Filter } from '../Filter';
@@ -11,15 +10,15 @@ interface ContentProps {
 export const Content = ({ children }: ContentProps) => {
   return (
     <>
-      <div className="flex justify-between">
-        <div className="flex">
+      <div className="flex justify-between p-8">
+        <div className="flex ">
           <Tab text="Todos os produtos" active={true} />
           <Tab text="Camisetas" active={false} />
           <Tab text="Canecas" active={false} />
         </div>
         <Filter />
       </div>
-      <Box>{children}</Box>
+      <Box className="px-8">{children}</Box>
     </>
   );
 };
