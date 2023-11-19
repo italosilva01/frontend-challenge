@@ -5,6 +5,7 @@ import { CardItemMinInfo } from '../CardItemMinInfo';
 
 import { useProduct } from '../../context/ProductContext';
 import { PaginationStyled } from '../PaginationStyled';
+import { EmptySearch } from '../EmptySearch';
 
 interface AllProductsProps {
   initProducts: object;
@@ -35,19 +36,23 @@ export const AllProducts = ({ initProducts }: AllProductsProps) => {
           container
           spacing={2}
           columns={{ xs: 4, md: 4 }}
-          className=" mx-auto w-[100%] "
+          className=" mx-auto w-[100%]   h-[100%] "
           alignItems="center"
           justifyContent="center"
         >
-          {products.map(({ name, image_url, price_in_cents }, index) => (
-            <Grid item key={index} md>
-              <CardItemMinInfo
-                productPrice={price_in_cents}
-                imageUrl={image_url}
-                productName={name}
-              />
-            </Grid>
-          ))}
+          {products.length === 0 ? (
+            <EmptySearch />
+          ) : (
+            products.map(({ name, image_url, price_in_cents }, index) => (
+              <Grid item key={index} md>
+                <CardItemMinInfo
+                  productPrice={price_in_cents}
+                  imageUrl={image_url}
+                  productName={name}
+                />
+              </Grid>
+            ))
+          )}
         </Grid>
 
         <Box

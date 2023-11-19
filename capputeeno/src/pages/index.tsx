@@ -14,12 +14,12 @@ const Home: NextPage = (props) => {
   const router = useRouter();
 
   return (
-    <div className="bg-[#F0F0F5] ">
+    <div className="bg-[#F0F0F5] h-[100%] ">
       <Head>
         <title>Capputeeno | Home</title>
       </Head>
       <Header />
-      <main className=" w-[90%] m-auto  overflow-auto ">
+      <main className=" w-[90%]  m-auto  overflow-auto bg-[#F0F0F5]">
         <Content>
           <AllProducts initProducts={props} />
         </Content>

@@ -11,7 +11,7 @@ import { ButtonFilter } from './components/ButtonFilter';
 export const Filter = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const { addProducts } = useProduct();
+  const { setProducts: addProducts } = useProduct();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);

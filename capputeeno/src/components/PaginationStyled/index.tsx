@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
-import Pagination, { PaginationProps } from '@mui/material/Pagination';
+import Pagination from '@mui/material/Pagination';
 import { useProduct } from '../../context/ProductContext';
 import { grapQLClient } from '../../services/graphiqlClient';
 import { gql } from 'graphql-request';
@@ -11,7 +11,7 @@ export const PaginationStyled = () => {
   const handlePagined = async (page: number) => {
     const { allProducts } = await grapQLClient.request(gql`
       query {
-        allProducts(page: ${page},perPage: 24) {
+        allProducts(page: ${page},perPage: 12) {
           image_url
           name
           price_in_cents
