@@ -10,20 +10,13 @@ interface ProductProviderProps {
 interface ProductContextData {
   products: Product[];
   addProducts: (newProducts: Product[]) => void;
-  currentPage: number;
-  changeCurrentPage: (newValue: number) => void;
 }
 
 export const ProductProvider = ({ children }: ProductProviderProps) => {
   const [products, setProducts] = useState<Product[]>([] as Product[]);
-  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const addProducts = (newProducts: Product[]) => {
     setProducts(newProducts);
-  };
-
-  const changeCurrentPage = (newValue: number) => {
-    setCurrentPage(newValue);
   };
 
   return (
@@ -31,8 +24,6 @@ export const ProductProvider = ({ children }: ProductProviderProps) => {
       value={{
         addProducts,
         products,
-        currentPage,
-        changeCurrentPage,
       }}
     >
       {children}

@@ -6,6 +6,8 @@ import { CardItemMinInfo } from '../CardItemMinInfo';
 import { useProduct } from '../../context/ProductContext';
 import { PaginationStyled } from '../PaginationStyled';
 import { EmptySearch } from '../EmptySearch';
+import { grapQLClient } from '../../services/graphiqlClient';
+import { gql } from 'graphql-request';
 
 interface AllProductsProps {
   initProducts: object;
@@ -13,6 +15,21 @@ interface AllProductsProps {
 
 export const AllProducts = ({ initProducts }: AllProductsProps) => {
   const { addProducts, products } = useProduct();
+  const { changeCurrentPage } = useProduct();
+
+  const handlePagined = async (page: number) => {
+    const { allProducts } = await grapQLClient.request(gql`
+      query {
+        allProducts(page: ${page},perPage: 12) {
+          image_url
+          name
+          price_in_cents
+        }
+      }
+    `);
+    changeCurrentPage(page);
+    addProducts(allProducts);
+  };
 
   useEffect(() => {
     if (initProducts) addProducts(Object.values(initProducts)[0]);
@@ -29,7 +46,7 @@ export const AllProducts = ({ initProducts }: AllProductsProps) => {
             marginBottom: '21px',
           }}
         >
-          <PaginationStyled />
+          <PaginationStyled handlePagination={handlePagined} />
         </Box>
 
         <Grid
@@ -63,7 +80,7 @@ export const AllProducts = ({ initProducts }: AllProductsProps) => {
             marginBottom: '21px',
           }}
         >
-          <PaginationStyled />
+          <PaginationStyled handlePagination={handlePagined} />
         </Box>
       </Box>
     </>

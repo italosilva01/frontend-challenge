@@ -11,6 +11,7 @@ const Search = z.object({
   search: z.string(),
 });
 
+interface SearchItemProps {}
 export const SearchItem = () => {
   type TypeSearch = z.infer<typeof Search>;
   const { register, handleSubmit } = useForm<TypeSearch>();
