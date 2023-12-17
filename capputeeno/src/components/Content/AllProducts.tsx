@@ -15,21 +15,6 @@ interface AllProductsProps {
 
 export const AllProducts = ({ initProducts }: AllProductsProps) => {
   const { addProducts, products } = useProduct();
-  const { changeCurrentPage } = useProduct();
-
-  const handlePagined = async (page: number) => {
-    const { allProducts } = await grapQLClient.request(gql`
-      query {
-        allProducts(page: ${page},perPage: 12) {
-          image_url
-          name
-          price_in_cents
-        }
-      }
-    `);
-    changeCurrentPage(page);
-    addProducts(allProducts);
-  };
 
   useEffect(() => {
     if (initProducts) addProducts(Object.values(initProducts)[0]);
@@ -38,17 +23,6 @@ export const AllProducts = ({ initProducts }: AllProductsProps) => {
   return (
     <>
       <Box>
-        <Box
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            marginTop: '21px',
-            marginBottom: '21px',
-          }}
-        >
-          <PaginationStyled handlePagination={handlePagined} />
-        </Box>
-
         <Grid
           container
           spacing={2}
@@ -71,17 +45,6 @@ export const AllProducts = ({ initProducts }: AllProductsProps) => {
             ))
           )}
         </Grid>
-
-        <Box
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            marginTop: '21px',
-            marginBottom: '21px',
-          }}
-        >
-          <PaginationStyled handlePagination={handlePagined} />
-        </Box>
       </Box>
     </>
   );
