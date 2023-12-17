@@ -5,16 +5,17 @@ import { useProduct } from '../../context/ProductContext';
 
 interface PaginationStyledProps {
   handlePagination: (e: number) => void;
+  currentPage: number;
 }
 export const PaginationStyled = ({
   handlePagination,
+  currentPage,
 }: PaginationStyledProps) => {
-  const { currentPage } = useProduct();
-
+  const numberTotalPagesAPI = 2;
   return (
     <Box>
       <Pagination
-        count={2}
+        count={numberTotalPagesAPI}
         shape="rounded"
         onChange={(_e, value) => {
           handlePagination(value);

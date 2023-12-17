@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import { gql } from 'graphql-request';
@@ -17,6 +17,12 @@ import styled from '@emotion/styled';
 const Home: NextPage = (props) => {
   const { addProducts } = useProduct();
 
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const changeCurrentPage = (currentPage: number) => {
+    setCurrentPage(currentPage);
+  };
+
   const handlePagined = async (page: number) => {
     const { allProducts } = await grapQLClient.request(gql`
       query {
@@ -27,7 +33,7 @@ const Home: NextPage = (props) => {
         }
       }
     `);
-    //changeCurrentPage(page);
+    changeCurrentPage(page);
     addProducts(allProducts);
   };
   return (
@@ -39,11 +45,17 @@ const Home: NextPage = (props) => {
       <main className=" w-[90%]  m-auto  overflow-auto bg-[#F0F0F5]">
         <Content>
           <ContainerPagination>
-            <PaginationStyled handlePagination={handlePagined} />
+            <PaginationStyled
+              handlePagination={handlePagined}
+              currentPage={currentPage}
+            />
           </ContainerPagination>
           <AllProducts initProducts={props} />
           <ContainerPagination>
-            <PaginationStyled handlePagination={handlePagined} />
+            <PaginationStyled
+              handlePagination={handlePagined}
+              currentPage={currentPage}
+            />
           </ContainerPagination>
         </Content>
       </main>
