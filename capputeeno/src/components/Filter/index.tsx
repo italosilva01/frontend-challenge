@@ -7,11 +7,13 @@ import { grapQLClient } from '../../services/graphiqlClient';
 import { useProduct } from '../../context/ProductContext';
 import { Product } from '../../@types/types';
 import { ButtonFilter } from './components/ButtonFilter';
+import { useNavigation } from '../../context/NavigationContext';
 
 export const Filter = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const { addProducts } = useProduct();
+  const { page } = useNavigation();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);
@@ -24,7 +26,7 @@ export const Filter = () => {
   const getFiltedItens = async (valueFilter: string, order: string = '') => {
     const { allProducts } = await grapQLClient.request(gql`
       query {
-        allProducts(page: 1, sortOrder: "${valueFilter}", sortField: "${valueFilter}") {
+        allProducts(page: ${page}, sortOrder: "${valueFilter}", sortField: "${valueFilter}") {
             image_url
         name
         sales

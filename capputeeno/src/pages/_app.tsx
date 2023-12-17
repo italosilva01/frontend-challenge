@@ -6,6 +6,7 @@ import 'tailwindcss/tailwind.css';
 import { ProductProvider } from '../context/ProductContext';
 import { Box } from '@mui/material';
 import { SearchProvider } from '../context/SearchContext';
+import { NavigationProvider } from '../context/NavigationContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(new QueryClient());
@@ -15,7 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <ProductProvider>
           <SearchProvider>
-            <Component {...pageProps} />
+            <NavigationProvider>
+              <Component {...pageProps} />
+            </NavigationProvider>
           </SearchProvider>
         </ProductProvider>
       </QueryClientProvider>

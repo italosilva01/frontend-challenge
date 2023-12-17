@@ -12,27 +12,23 @@ import { PaginationStyled } from '../components/PaginationStyled';
 import { Box } from '@mui/material';
 import { useProduct } from '../context/ProductContext';
 import styled from '@emotion/styled';
+import { useNavigation } from '../context/NavigationContext';
 
 const Home: NextPage = (props) => {
   const { addProducts } = useProduct();
+  const { changePage, page } = useNavigation();
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
-  const changeCurrentPage = (currentPage: number) => {
-    setCurrentPage(currentPage);
-  };
-
-  const handlePagined = async (page: number) => {
+  const handlePagined = async (newPage: number) => {
     const { allProducts } = await grapQLClient.request(gql`
       query {
-        allProducts(page: ${page},perPage: 12) {
+        allProducts(page: ${newPage},perPage: 12) {
           image_url
           name
           price_in_cents
         }
       }
     `);
-    changeCurrentPage(page);
+    changePage(newPage);
     addProducts(allProducts);
   };
   return (
@@ -46,14 +42,14 @@ const Home: NextPage = (props) => {
           <ContainerPagination>
             <PaginationStyled
               handlePagination={handlePagined}
-              currentPage={currentPage}
+              currentPage={page}
             />
           </ContainerPagination>
           <AllProducts initProducts={props} />
           <ContainerPagination>
             <PaginationStyled
               handlePagination={handlePagined}
-              currentPage={currentPage}
+              currentPage={page}
             />
           </ContainerPagination>
         </Content>
