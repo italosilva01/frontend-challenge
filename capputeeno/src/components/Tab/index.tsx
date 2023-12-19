@@ -12,7 +12,7 @@ export const Tab = ({ text, onClick, active }: TabProps) => {
   const fontUnActive = `border-0 text-gray-500 ${fontStyleCommun}`;
 
   return (
-    <div onClick={() => console.log('teste')} className="mr-10 text-center">
+    <div onClick={onClick} className="mr-10 text-center">
       <p className={active ? fontActive : fontUnActive}>{text}</p>
     </div>
   );
