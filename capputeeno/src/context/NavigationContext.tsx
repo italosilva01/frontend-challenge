@@ -1,10 +1,13 @@
 import React, { ReactNode, createContext, useContext, useState } from 'react';
+import { TabType } from '../@types/types';
 
 const NavigationContext = createContext<NavigationContextData>([]);
 
 interface NavigationContextData {
   page: number;
+  categoryProduct: TabType;
   changePage: (val: number) => void;
+  changeCategory: (val: TabType) => void;
 }
 
 interface NavigationProvider {
@@ -13,16 +16,23 @@ interface NavigationProvider {
 
 export const NavigationProvider = ({ children }: NavigationProvider) => {
   const [page, setPage] = useState(1);
+  const [categoryProduct, setCategoryProduct] = useState<TabType>('all');
+  //const [categoryProduct, setCategoryProduct] = useState<TabType>('all');
 
   const changePage = (val: number) => {
     setPage(val);
+  };
+  const changeCategory = (val: TabType) => {
+    setCategoryProduct(val);
   };
 
   return (
     <NavigationContext.Provider
       value={{
         page,
+        categoryProduct,
         changePage,
+        changeCategory,
       }}
     >
       {children}

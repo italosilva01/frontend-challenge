@@ -13,24 +13,12 @@ import { Box } from '@mui/material';
 import { useProduct } from '../context/ProductContext';
 import styled from '@emotion/styled';
 import { useNavigation } from '../context/NavigationContext';
+import { useRequestGraphQl } from '../hooks/request';
 
 const Home: NextPage = (props) => {
-  const { addProducts } = useProduct();
-  const { changePage, page } = useNavigation();
+  const { page } = useNavigation();
+  const { handlePagined } = useRequestGraphQl();
 
-  const handlePagined = async (newPage: number) => {
-    const { allProducts } = await grapQLClient.request(gql`
-      query {
-        allProducts(page: ${newPage},perPage: 12) {
-          image_url
-          name
-          price_in_cents
-        }
-      }
-    `);
-    changePage(newPage);
-    addProducts(allProducts);
-  };
   return (
     <div className="bg-[#F0F0F5] h-[100%] ">
       <Head>

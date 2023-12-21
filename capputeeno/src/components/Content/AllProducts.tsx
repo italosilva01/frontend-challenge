@@ -4,10 +4,7 @@ import { Box, Grid } from '@mui/material';
 import { CardItemMinInfo } from '../CardItemMinInfo';
 
 import { useProduct } from '../../context/ProductContext';
-import { PaginationStyled } from '../PaginationStyled';
 import { EmptySearch } from '../EmptySearch';
-import { grapQLClient } from '../../services/graphiqlClient';
-import { gql } from 'graphql-request';
 
 interface AllProductsProps {
   initProducts: object;
