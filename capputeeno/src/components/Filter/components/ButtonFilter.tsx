@@ -1,8 +1,8 @@
 import React from 'react';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
-import { Button, ButtonBaseProps } from '@mui/material';
+import { Button, ButtonProps } from '@mui/material';
 
-export const ButtonFilter = (props: ButtonBaseProps) => {
+export const ButtonFilter = (props: ButtonProps) => {
   return (
     <Button className="text-black" {...props}>
       Organizar por{' '}

@@ -13,17 +13,17 @@ export const useRequestGraphQl = () => {
     changePage(firstPage);
     changeCategory(value);
 
-    const isAllProductsTab = value === 'all' || categoryProduct === 'all';
+    const isAllProductsTab = value === 'all';
     const { allProducts } = await grapQLClient.request(gql`
-      query {
-        allProducts(filter: { ${
-          isAllProductsTab ? '' : `category: "${value}"`
-        } }, perPage: 12, page: 1) {
+      query{
+        allProducts(${
+          isAllProductsTab ? '' : `filter:{${`category:"${value}"`}},`
+        }perPage:12,page:1 ){
           image_url
-          name
-          sales
-          price_in_cents
-          created_at
+              name
+              sales
+              price_in_cents
+              created_at
         }
       }
     `);
@@ -31,9 +31,15 @@ export const useRequestGraphQl = () => {
     addProducts(allProducts);
   };
   const getFiltedItens = async (valueFilter: string, order: string = '') => {
+    const isAllProductsTab = categoryProduct === 'all';
+
     const { allProducts } = await grapQLClient.request(gql`
         query {
-          allProducts(page: ${page}, sortOrder: "${valueFilter}", sortField: "${valueFilter}") {
+          allProducts(${
+            isAllProductsTab
+              ? ''
+              : `filter:{${`category:"${categoryProduct}"`}},`
+          }page: ${page},perPage:12, sortOrder: "${valueFilter}", sortField: "${valueFilter}") {
               image_url
           name
           sales

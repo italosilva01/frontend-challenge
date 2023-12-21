@@ -1,7 +1,9 @@
 import React, { ReactNode, createContext, useContext, useState } from 'react';
 import { TabType } from '../@types/types';
 
-const NavigationContext = createContext<NavigationContextData>([]);
+const NavigationContext = createContext<NavigationContextData>(
+  [] as unknown as NavigationContextData
+);
 
 interface NavigationContextData {
   page: number;
@@ -17,7 +19,6 @@ interface NavigationProvider {
 export const NavigationProvider = ({ children }: NavigationProvider) => {
   const [page, setPage] = useState(1);
   const [categoryProduct, setCategoryProduct] = useState<TabType>('all');
-  //const [categoryProduct, setCategoryProduct] = useState<TabType>('all');
 
   const changePage = (val: number) => {
     setPage(val);

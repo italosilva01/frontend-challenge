@@ -10,7 +10,6 @@ import { grapQLClient } from '../services/graphiqlClient';
 import { AllProducts } from '../components/Content/AllProducts';
 import { PaginationStyled } from '../components/PaginationStyled';
 import { Box } from '@mui/material';
-import { useProduct } from '../context/ProductContext';
 import styled from '@emotion/styled';
 import { useNavigation } from '../context/NavigationContext';
 import { useRequestGraphQl } from '../hooks/request';
