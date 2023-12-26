@@ -4,6 +4,7 @@ export interface Product {
   sales: number;
   price_in_cents: string;
   created_at: string;
+  id: string;
 }
 
 export type TabType = 'all' | 't-shirts' | 'mugs';

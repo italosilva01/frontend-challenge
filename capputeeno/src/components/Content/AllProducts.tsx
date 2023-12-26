@@ -31,9 +31,10 @@ export const AllProducts = ({ initProducts }: AllProductsProps) => {
           {products.length === 0 ? (
             <EmptySearch />
           ) : (
-            products.map(({ name, image_url, price_in_cents }, index) => (
+            products.map(({ name, image_url, price_in_cents, id }, index) => (
               <Grid item key={index} md>
                 <CardItemMinInfo
+                  idProduct={id}
                   productPrice={price_in_cents}
                   imageUrl={image_url}
                   productName={name}

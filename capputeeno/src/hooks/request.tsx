@@ -20,6 +20,7 @@ export const useRequestGraphQl = () => {
           isAllProductsTab ? '' : `filter:{${`category:"${value}"`}},`
         }perPage:12,page:1 ){
           image_url
+           id
               name
               sales
               price_in_cents
@@ -45,6 +46,8 @@ export const useRequestGraphQl = () => {
           sales
           price_in_cents
           created_at
+          id
+
           }
         }
       `);
@@ -75,6 +78,7 @@ export const useRequestGraphQl = () => {
         allProducts(page: ${newPage},perPage: 12,${
       !isCategoryAll ? `filter: {category:"${categoryProduct}"}` : ''
     }) {
+      id
           image_url
           name
           price_in_cents

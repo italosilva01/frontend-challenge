@@ -23,7 +23,6 @@ const Home: NextPage = (props) => {
       <Head>
         <title>Capputeeno | Home</title>
       </Head>
-      <Header />
       <main className=" w-[90%]  m-auto  overflow-auto bg-[#F0F0F5]">
         <Content>
           <ContainerPagination>
@@ -52,6 +51,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
         image_url
         name
         price_in_cents
+        id
       }
     }
   `);
