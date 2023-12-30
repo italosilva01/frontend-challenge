@@ -1,16 +1,26 @@
-import { useRouter } from 'next/router';
 import React from 'react';
 import { grapQLClient } from '../../services/graphiqlClient';
 import { gql } from 'graphql-request';
 import { Product } from '../../@types/types';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { GetServerSideProps } from 'next';
 
-export const getServerSideProps = (async (context: {
-  params: { id: string };
-}) => {
-  const { id } = context.params;
+import { Main } from '../../components/Main';
+import { InforProduct } from './components/InfoProduct';
+import { Box } from '@mui/material';
 
-  const response = await grapQLClient.request(gql`
+interface ProductProps {
+  product: Product;
+}
+
+interface ResponseProps {
+  data: ProductProps;
+}
+
+export const getServerSideProps: GetServerSideProps<{
+  product: Product;
+}> = async (context) => {
+  const id = context.params?.id as string;
+  const response: ProductProps = await grapQLClient.request(gql`
     query{
       Product(id:"${id}") {
         id
@@ -22,17 +32,23 @@ export const getServerSideProps = (async (context: {
     
     `);
 
-  const product: Product = await response.json();
+  const product: Product = Object.values(response)[0];
 
   return { props: { product } };
-}) satisfies GetServerSideProps<{ product: Product }>;
+};
 
-export default function Page({
-  product,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Page({ product }: ProductProps) {
   return (
     <>
-      <p>Post</p>;<p>{product.name}</p>
+      <Main>
+        <Box>
+          <p>{product.name}</p>
+        </Box>
+
+        <Box>
+          <InforProduct />
+        </Box>
+      </Main>
     </>
   );
 }

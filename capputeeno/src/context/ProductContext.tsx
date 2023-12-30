@@ -16,7 +16,6 @@ export const ProductProvider = ({ children }: ProductProviderProps) => {
   const [products, setProducts] = useState<Product[]>([] as Product[]);
 
   const addProducts = (newProducts: Product[]) => {
-    console.log(newProducts);
     setProducts(newProducts);
   };
 
