@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Image from 'next/image';
 import Link from 'next/link';
+import { convertPrice } from '../../utils';
 
 interface CardItemMinInfo {
   productName: string;
@@ -16,10 +17,7 @@ export const CardItemMinInfo = ({
   imageUrl,
   idProduct,
 }: CardItemMinInfo) => {
-  const parteInteira = String(productPrice).substring(0, 2);
-  const parteDecimal = String(productPrice).substring(2, productPrice.length);
-  const numeroComPontoFinal = `${parteInteira}.${parteDecimal}`;
-
+  const numeroComPontoFinal = convertPrice(productPrice);
   return (
     <Link href={`/product/${idProduct}`}>
       <Box className=" rounded-lg bg-white w-[16rem] min-h-min ">

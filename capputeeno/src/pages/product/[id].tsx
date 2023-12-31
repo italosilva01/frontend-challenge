@@ -6,7 +6,8 @@ import { GetServerSideProps } from 'next';
 
 import { Main } from '../../components/Main';
 import { InforProduct } from './components/InfoProduct';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import { convertPrice } from '../../utils';
 
 interface ProductProps {
   product: Product;
@@ -38,15 +39,31 @@ export const getServerSideProps: GetServerSideProps<{
 };
 
 export default function Page({ product }: ProductProps) {
+  const numeroComPontoFinal = convertPrice(product.price_in_cents);
+
   return (
     <>
       <Main>
         <Box>
-          <p>{product.name}</p>
+          <Typography variant="h4" className="text-[#737380]">
+            {product.name}
+          </Typography>
+          <Typography variant="h5">
+            <p className="font-bold ">
+              {Number(numeroComPontoFinal).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </p>
+          </Typography>
         </Box>
 
+        <Typography className="text-[#737380]" variant="body2">
+          *Frete de R$40,00 para todo o Brasil. Grátis para compras acima de
+          R$900,00.
+        </Typography>
         <Box>
-          <InforProduct />
+          <InforProduct product={product} />
         </Box>
       </Main>
     </>
