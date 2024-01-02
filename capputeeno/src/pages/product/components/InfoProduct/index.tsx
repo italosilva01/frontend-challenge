@@ -10,7 +10,7 @@ interface InforProductProps {
 
 export const InforProduct = ({ product }: InforProductProps) => {
   return (
-    <Box>
+    <Box className="flex flex-col ">
       <DescriptionProduct description={product.description || ' '} />
       <ButtonAddCard />
     </Box>

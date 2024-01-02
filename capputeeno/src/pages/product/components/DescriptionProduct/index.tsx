@@ -5,7 +5,7 @@ interface DescriptionProduct {
 }
 export const DescriptionProduct = ({ description }: DescriptionProduct) => {
   return (
-    <Box>
+    <Box className="mb-auto">
       <Box className=" flex flex-col gap-2  text-[#737380]">
         <Box>
           <Typography className="text-base">DESCRIÇÃO</Typography>

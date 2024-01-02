@@ -44,7 +44,7 @@ export const SearchItem = () => {
         InputProps={{
           endAdornment: (
             <IconButton type="submit">
-              <Image src={'/images/Group.svg'} width={24} height={24} />
+              <Image src={'/images/glass.svg'} width={24} height={24} />
             </IconButton>
           ),
         }}
