@@ -1,7 +1,7 @@
 import React from 'react';
 import { grapQLClient } from '../../services/graphiqlClient';
 import { gql } from 'graphql-request';
-import { Product } from '../../@types/types';
+import { Product, TabType } from '../../@types/types';
 import { GetServerSideProps } from 'next';
 
 import { Main } from '../../components/Main';
@@ -10,6 +10,7 @@ import { Box, Typography } from '@mui/material';
 import { convertPrice } from '../../utils';
 import Image from 'next/image';
 import { BackButton } from './components/BackButton';
+import { ButtonAddCard } from './components/ButtonAddCar';
 
 interface ProductProps {
   product: Product;
@@ -31,6 +32,7 @@ export const getServerSideProps: GetServerSideProps<{
         price_in_cents
         description
         image_url
+        category
       }
     } 
     
@@ -43,18 +45,33 @@ export const getServerSideProps: GetServerSideProps<{
 
 export default function Page({ product }: ProductProps) {
   const numeroComPontoFinal = convertPrice(product.price_in_cents);
+
+  console.log(product);
+
+  const returnCategoryProduct = (categoryProduct: TabType | undefined) => {
+    if (categoryProduct === 'mugs') {
+      return 'caneca';
+    } else return 'Camiseta';
+  };
+
   return (
     <>
-      <Main className="flex-col ">
+      <Main className="flex-col h-auto overflow-hidden">
         <BackButton />
-        <Box className="flex gap-8">
+        <Box className="flex gap-8 h-full">
           <Box>
             <Image src={product.image_url} width={640} height={560} />
           </Box>
-          <Box className="mb-6">
-            <Typography variant="h4" className="text-[#737380]">
-              {product.name}
-            </Typography>
+
+          <Box>
+            <Box className="text-[#737380]">
+              <Typography variant="body1">
+                {returnCategoryProduct(product.category)}
+              </Typography>
+              <Typography variant="h4" className="">
+                {product.name}
+              </Typography>
+            </Box>
             <Typography variant="h5">
               <p className="font-bold ">
                 {Number(numeroComPontoFinal).toLocaleString('pt-BR', {
@@ -68,8 +85,9 @@ export default function Page({ product }: ProductProps) {
               *Frete de R$40,00 para todo o Brasil. Grátis para compras acima de
               R$900,00.
             </Typography>
-            <Box>
+            <Box className="h-[416px]  px-2  flex flex-col justify-between ">
               <InforProduct product={product} />
+              <ButtonAddCard />
             </Box>
           </Box>
         </Box>

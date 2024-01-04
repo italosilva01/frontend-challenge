@@ -5,7 +5,7 @@ export const ButtonAddCard = () => {
   return (
     <Button
       variant="contained"
-      className="bg-[#115D8C] flex py-3 gap-4 w-[448px] pa "
+      className="bg-[#115D8C]  py-3 gap-4 w-[448px]  "
     >
       <img
         className="ml-8 text-white"

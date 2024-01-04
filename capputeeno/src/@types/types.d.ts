@@ -6,6 +6,7 @@ export interface Product {
   created_at: string;
   id: string;
   description?: string;
+  category?: TabType;
 }
 
 export type TabType = 'all' | 't-shirts' | 'mugs';

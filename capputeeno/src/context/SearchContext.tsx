@@ -1,6 +1,8 @@
 import React, { ReactNode, useContext, useState } from 'react';
 
-const SearchContext = React.createContext<SearchContextData>([]);
+const SearchContext = React.createContext<SearchContextData>(
+  [] as unknown as SearchContextData
+);
 
 interface SearchContextData {
   changeCurrentPage: (v: number) => void;

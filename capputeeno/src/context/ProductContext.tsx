@@ -1,7 +1,9 @@
 import React, { ReactNode, useState, useContext, createContext } from 'react';
 import { Product } from '../@types/types';
 
-const ProductContext = createContext<ProductContextData>([]);
+const ProductContext = createContext<ProductContextData>(
+  [] as unknown as ProductContextData
+);
 
 interface ProductProviderProps {
   children: ReactNode;
