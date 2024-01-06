@@ -8,6 +8,7 @@ import { Box } from '@mui/material';
 import { SearchProvider } from '../context/SearchContext';
 import { NavigationProvider } from '../context/NavigationContext';
 import { Header } from '../components/Header';
+import { ShoppingCarProvider } from '../hooks/shoppingCar';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(new QueryClient());
@@ -17,11 +18,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <ProductProvider>
           <SearchProvider>
-            <NavigationProvider>
-              {' '}
-              <Header />
-              <Component {...pageProps} />
-            </NavigationProvider>
+            <ShoppingCarProvider>
+              <NavigationProvider>
+                {' '}
+                <Header />
+                <Component {...pageProps} />
+              </NavigationProvider>
+            </ShoppingCarProvider>
           </SearchProvider>
         </ProductProvider>
       </QueryClientProvider>

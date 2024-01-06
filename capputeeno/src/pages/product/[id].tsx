@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { grapQLClient } from '../../services/graphiqlClient';
 import { gql } from 'graphql-request';
 import { Product, TabType } from '../../@types/types';
@@ -11,6 +11,7 @@ import { convertPrice } from '../../utils';
 import Image from 'next/image';
 import { BackButton } from './components/BackButton';
 import { ButtonAddCard } from './components/ButtonAddCar';
+import { useShoppingCar } from '../../hooks/shoppingCar';
 
 interface ProductProps {
   product: Product;
@@ -46,14 +47,16 @@ export const getServerSideProps: GetServerSideProps<{
 export default function Page({ product }: ProductProps) {
   const numeroComPontoFinal = convertPrice(product.price_in_cents);
 
-  console.log(product);
-
+  const { addCar } = useShoppingCar();
   const returnCategoryProduct = (categoryProduct: TabType | undefined) => {
     if (categoryProduct === 'mugs') {
       return 'caneca';
     } else return 'Camiseta';
   };
 
+  const handleAddProductShoppingcar = (product: Product) => {
+    addCar(product);
+  };
   return (
     <>
       <Main className="flex-col h-auto overflow-hidden">
@@ -87,7 +90,9 @@ export default function Page({ product }: ProductProps) {
             </Typography>
             <Box className="h-[416px]  px-2  flex flex-col justify-between ">
               <InforProduct product={product} />
-              <ButtonAddCard />
+              <ButtonAddCard
+                handleFunction={() => handleAddProductShoppingcar(product)}
+              />
             </Box>
           </Box>
         </Box>
