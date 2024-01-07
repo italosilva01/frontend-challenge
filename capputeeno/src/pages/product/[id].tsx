@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { grapQLClient } from '../../services/graphiqlClient';
 import { gql } from 'graphql-request';
 import { Product, TabType } from '../../@types/types';
@@ -47,7 +47,14 @@ export const getServerSideProps: GetServerSideProps<{
 export default function Page({ product }: ProductProps) {
   const numeroComPontoFinal = convertPrice(product.price_in_cents);
 
-  const { addCar } = useShoppingCar();
+  const { addCar, productsShoppingCar } = useShoppingCar();
+
+  const inShoppingCar = useMemo(
+    () => (productsShoppingCar.find((e) => e.id === product.id) ? true : false),
+    [productsShoppingCar]
+  );
+
+  console.log(inShoppingCar);
   const returnCategoryProduct = (categoryProduct: TabType | undefined) => {
     if (categoryProduct === 'mugs') {
       return 'caneca';
@@ -91,6 +98,7 @@ export default function Page({ product }: ProductProps) {
             <Box className="h-[416px]  px-2  flex flex-col justify-between ">
               <InforProduct product={product} />
               <ButtonAddCard
+                productAddedCar={inShoppingCar}
                 handleFunction={() => handleAddProductShoppingcar(product)}
               />
             </Box>
