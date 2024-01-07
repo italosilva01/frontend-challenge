@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import { Product } from '../@types/types';
-import { sessionShoppingCarKey } from '../constants/sessionStorageKeys';
+import { localShoppingCarKey } from '../constants/localStorageKeys';
 const ShoppingCarContext = createContext<ShoppingCarContextData>(
   [] as unknown as ShoppingCarContextData
 );
@@ -25,17 +25,23 @@ export const ShoppingCarProvider = ({ children }: ShoppingCarProviderProps) => {
   const [productsShoppingCar, setProductsShoppingCar] = useState<Product[]>([]);
 
   useEffect(() => {
-    sessionStorage.setItem(
-      sessionShoppingCarKey,
-      JSON.stringify(productsShoppingCar)
+    const shoppingCarLocalStorage: Product[] = JSON.parse(
+      localStorage.getItem(localShoppingCarKey) || ''
     );
-  }, [productsShoppingCar]);
 
+    setProductsShoppingCar(shoppingCarLocalStorage);
+  }, []);
+
+  const changeSessionStorage = (newShoppingCar: Product[]) => {
+    localStorage.setItem(localShoppingCarKey, JSON.stringify(newShoppingCar));
+  };
   const addCar = (newProduct: Product) => {
     if (productsShoppingCar.find((ele) => ele.id === newProduct.id)) return;
 
     const newProductsShoppingCar = [...productsShoppingCar, newProduct];
     setProductsShoppingCar(newProductsShoppingCar);
+
+    changeSessionStorage(newProductsShoppingCar);
   };
 
   const removeCar = (idProduct: string) => {
@@ -43,6 +49,7 @@ export const ShoppingCarProvider = ({ children }: ShoppingCarProviderProps) => {
       (p) => p.id !== idProduct
     );
     setProductsShoppingCar(newProductsShoppingCar);
+    changeSessionStorage(newProductsShoppingCar);
   };
 
   return (
