@@ -26,7 +26,7 @@ export const ShoppingCarProvider = ({ children }: ShoppingCarProviderProps) => {
 
   useEffect(() => {
     const shoppingCarLocalStorage: Product[] = JSON.parse(
-      localStorage.getItem(localShoppingCarKey) || ''
+      localStorage.getItem(localShoppingCarKey) || '[]'
     );
 
     setProductsShoppingCar(shoppingCarLocalStorage);

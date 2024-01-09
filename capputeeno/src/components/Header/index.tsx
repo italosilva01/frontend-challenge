@@ -1,7 +1,8 @@
 import React from 'react';
 import { SearchItem } from '../SearchItem';
-import { Badge } from '@mui/material';
+import { Badge, IconButton } from '@mui/material';
 import { useShoppingCar } from '../../hooks/shoppingCar';
+import Link from 'next/link';
 
 export const Header = () => {
   const { productsShoppingCar } = useShoppingCar();
@@ -15,17 +16,14 @@ export const Header = () => {
           <div>
             <SearchItem />
           </div>
-          <Badge
-            badgeContent={productsShoppingCar.length}
-            color="error"
-            className="mb-3"
-          >
-            <img
-              className="ml-8"
-              src="/images/shopping-bag.svg"
-              alt="shopping-bag"
-            />
-          </Badge>
+
+          <IconButton size="small">
+            <Link href={`/shoppingCar`}>
+              <Badge badgeContent={productsShoppingCar.length} color="error">
+                <img src="/images/shopping-bag.svg" alt="shopping-bag" />
+              </Badge>
+            </Link>
+          </IconButton>
         </div>
       </div>
     </div>

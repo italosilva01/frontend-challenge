@@ -47,14 +47,13 @@ export const getServerSideProps: GetServerSideProps<{
 export default function Page({ product }: ProductProps) {
   const numeroComPontoFinal = convertPrice(product.price_in_cents);
 
-  const { addCar, productsShoppingCar } = useShoppingCar();
+  const { addCar, removeCar, productsShoppingCar } = useShoppingCar();
 
   const inShoppingCar = useMemo(
     () => (productsShoppingCar.find((e) => e.id === product.id) ? true : false),
     [productsShoppingCar]
   );
 
-  console.log(inShoppingCar);
   const returnCategoryProduct = (categoryProduct: TabType | undefined) => {
     if (categoryProduct === 'mugs') {
       return 'caneca';
@@ -62,7 +61,7 @@ export default function Page({ product }: ProductProps) {
   };
 
   const handleAddProductShoppingcar = (product: Product) => {
-    addCar(product);
+    inShoppingCar ? removeCar(product.id) : addCar(product);
   };
   return (
     <>
