@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Box, IconButton, TextField, Typography } from '@mui/material';
 import { Product } from '../../../@types/types';
 import Image from 'next/image';
+import { convertPrice } from '../../../utils';
 
 interface ProductCardProps {
   product: Product;
 }
 export const ProductCard = ({ product }: ProductCardProps) => {
   const [quantityProduct, setQuantityProduct] = useState(1);
-  useEffect(() => {
-    console.log(product);
-  }, []);
+
+  const convertedPrice =
+    (Number(product.price_in_cents) / 100) * quantityProduct;
 
   return (
     <Box className="w-[736px] rounded-md	overflow-hidden bg-white flex gap-x-8 ">
@@ -28,7 +29,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           {product.description}
         </Typography>
 
-        <Box className="flex justify-between">
+        <Box className="flex justify-between items-center">
           <TextField
             type="number"
             defaultValue={quantityProduct}
@@ -37,9 +38,15 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               console.log(e.currentTarget.value);
               setQuantityProduct(Number(e.currentTarget.value));
             }}
+            InputProps={{
+              inputProps: { min: 0 },
+            }}
           />
-          <Typography>
-            {Number(product.price_in_cents) * quantityProduct}
+          <Typography variant="body1" className="font-bold">
+            {Number(convertedPrice).toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
           </Typography>
         </Box>
       </Box>
