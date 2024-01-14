@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Box, IconButton, TextField, Typography } from '@mui/material';
 import { Product } from '../../../@types/types';
 import Image from 'next/image';
@@ -8,10 +8,9 @@ interface ProductCardProps {
   product: Product;
 }
 export const ProductCard = ({ product }: ProductCardProps) => {
-  const [quantityProduct, setQuantityProduct] = useState(1);
+  const { removeCar, changeQuantityProductCar } = useShoppingCar();
 
-  const { removeCar } = useShoppingCar();
-
+  const quantityProduct = product.quantity || 1;
   const convertedPrice =
     (Number(product.price_in_cents) / 100) * quantityProduct;
 
@@ -38,10 +37,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         <Box className="flex justify-between items-center">
           <TextField
             type="number"
-            defaultValue={quantityProduct}
+            defaultValue={product.quantity}
             className="w-[64px] h-[40px] color-[#A8A8B3]"
             onChange={(e) => {
-              setQuantityProduct(Number(e.currentTarget.value));
+              changeQuantityProductCar(
+                product.id,
+                Number(e.currentTarget.value)
+              );
             }}
             InputProps={{
               inputProps: { min: 0 },
