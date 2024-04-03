@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(new QueryClient());
 
   return (
-    <Box className="bg-[#F0F0F5]">
+    <Box className="bg-cream">
       <QueryClientProvider client={queryClient}>
         <ProductProvider>
           <SearchProvider>

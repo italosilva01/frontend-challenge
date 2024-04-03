@@ -6,7 +6,7 @@ export const EmptySearch = () => {
     <Box className="flex flex-col justify-start align-middle] h-screen ">
       <Typography variant="h1">Produto Não encontrado</Typography>
       <Typography variant="h2" className="mx-auto">
-        Desculpe o Incomodo
+        Desculpe o incômodo
       </Typography>
     </Box>
   );

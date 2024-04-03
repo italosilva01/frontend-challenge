@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Main } from '../../components/Main';
 import { BackButton } from '../product/components/BackButton';
 import { ProductCard } from './components/ProductCard';

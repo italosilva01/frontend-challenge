@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Box, Typography, Divider, Button } from '@mui/material';
 import { convertCurrencyBRL } from '../../../utils/convertCurrencyBRL';
 
