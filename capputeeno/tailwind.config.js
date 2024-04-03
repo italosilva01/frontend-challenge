@@ -3,6 +3,9 @@ module.exports = {
   important: true,
   theme: {
     extend: {
+      colors: {
+        'text-gray': '#41414D',
+      },
       ContainerBottomAdd: {
         height: 'calc(83% -10px)',
       },

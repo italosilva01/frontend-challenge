@@ -7,6 +7,7 @@ export interface Product {
   id: string;
   description?: string;
   category?: TabType;
+  quantity?: number;
 }
 
 export type TabType = 'all' | 't-shirts' | 'mugs';
