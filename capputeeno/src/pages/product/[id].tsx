@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { BackButton } from './components/BackButton';
 import { ButtonAddCard } from './components/ButtonAddCar';
 import { useShoppingCar } from '../../hooks/shoppingCar';
+import { convertCurrencyBRL } from '../../utils/convertCurrencyBRL';
 
 interface ProductProps {
   product: Product;
@@ -83,10 +84,7 @@ export default function Page({ product }: ProductProps) {
             </Box>
             <Typography variant="h5">
               <p className="font-bold ">
-                {Number(numeroComPontoFinal).toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                })}
+                {convertCurrencyBRL(Number(numeroComPontoFinal))}
               </p>
             </Typography>
 

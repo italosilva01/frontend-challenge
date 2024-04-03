@@ -4,7 +4,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'text-gray': '#41414D',
+        'gray-500': '#41414D',
+        cream: '#F0F0F5',
+        'gray-100': '#A8A8B3',
       },
       ContainerBottomAdd: {
         height: 'calc(83% -10px)',

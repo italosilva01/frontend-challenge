@@ -19,11 +19,11 @@ const Home: NextPage = (props) => {
   const { handlePagined } = useRequestGraphQl();
 
   return (
-    <div className="bg-[#F0F0F5] h-[100%] ">
+    <div className=" h-[100%] ">
       <Head>
         <title>Capputeeno | Home</title>
       </Head>
-      <main className=" w-[90%]  m-auto  overflow-auto bg-[#F0F0F5]">
+      <main className=" w-[90%]  m-auto  overflow-auto">
         <Content>
           <ContainerPagination>
             <PaginationStyled

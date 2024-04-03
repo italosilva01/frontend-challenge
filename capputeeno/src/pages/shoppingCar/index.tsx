@@ -5,6 +5,7 @@ import { ProductCard } from './components/ProductCard';
 import { useShoppingCar } from '../../hooks/shoppingCar';
 import { Box, Typography } from '@mui/material';
 import { TotalShoppingCarCard } from './components/TotalShoppingCarCard';
+import { convertCurrencyBRL } from '../../utils/convertCurrencyBRL';
 
 export default function Page() {
   const { productsShoppingCar } = useShoppingCar();
@@ -21,19 +22,16 @@ export default function Page() {
 
   const convertPrice = totalCart.price / 100;
 
-  const totalPrice = convertPrice.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  });
+  const totalPrice = convertCurrencyBRL(convertPrice);
   return (
     <Main>
       <BackButton />
 
-      <Typography variant="h5" className="text-text-gray">
+      <Typography variant="h5" className="text-gray-500">
         SEU CARRINHO
       </Typography>
 
-      <Typography variant="h6" className="text-text-gray">
+      <Typography variant="h6" className="text-gray-500">
         Total ({totalCart.quantity} produtos ) {totalPrice}
       </Typography>
       <Box className="flex gap-[32px]  mt-6 ">

@@ -20,7 +20,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           <SearchProvider>
             <ShoppingCarProvider>
               <NavigationProvider>
-                {' '}
                 <Header />
                 <Component {...pageProps} />
               </NavigationProvider>

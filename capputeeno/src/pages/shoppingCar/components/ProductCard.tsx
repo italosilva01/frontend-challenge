@@ -3,6 +3,7 @@ import { Box, IconButton, TextField, Typography } from '@mui/material';
 import { Product } from '../../../@types/types';
 import Image from 'next/image';
 import { useShoppingCar } from '../../../hooks/shoppingCar';
+import { convertCurrencyBRL } from '../../../utils/convertCurrencyBRL';
 
 interface ProductCardProps {
   product: Product;
@@ -15,10 +16,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     (Number(product.price_in_cents) / 100) * quantityProduct;
 
   return (
-    <Box className="w-[736px] h-[211px] rounded-md	overflow-hidden bg-white flex gap-x-8 ">
+    <Box className="w-[736px] h-[245px] rounded-md	overflow-hidden bg-white flex gap-x-8 ">
       <Image src={product.image_url} width={256} height={211} />
 
-      <Box className="w-full  text-text-gray   pl-0 p-4 flex flex-col gap-4">
+      <Box className="w-full  text-gray-500   pl-0 p-4 flex flex-col gap-4">
         <Box className="flex justify-between items-center">
           <Typography variant="h6">{product.name}</Typography>
           <IconButton
@@ -50,10 +51,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             }}
           />
           <Typography variant="body1" className="font-bold">
-            {Number(convertedPrice).toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-            })}
+            {convertCurrencyBRL(Number(convertedPrice))}
           </Typography>
         </Box>
       </Box>

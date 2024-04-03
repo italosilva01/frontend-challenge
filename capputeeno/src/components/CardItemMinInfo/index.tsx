@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Image from 'next/image';
 import Link from 'next/link';
 import { convertPrice } from '../../utils';
+import { convertCurrencyBRL } from '../../utils/convertCurrencyBRL';
 
 interface CardItemMinInfo {
   productName: string;
@@ -20,7 +21,7 @@ export const CardItemMinInfo = ({
   const numeroComPontoFinal = convertPrice(productPrice);
   return (
     <Link href={`/product/${idProduct}`}>
-      <Box className=" rounded-lg bg-white w-[16rem] min-h-min ">
+      <Box className=" rounded-lg bg-white w-[16rem] min-h-min cursor-pointer ">
         <Image
           src={imageUrl}
           width={256}
@@ -35,10 +36,7 @@ export const CardItemMinInfo = ({
           <div className="w-[14.25rem] h-[1px] border border-[DCE2E5] mx-auto" />
 
           <p className="font-bold ">
-            {Number(numeroComPontoFinal).toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-            })}
+            {convertCurrencyBRL(Number(numeroComPontoFinal))}
           </p>
         </Box>
       </Box>
