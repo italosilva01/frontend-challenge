@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import { gql } from 'graphql-request';
 
-import { Header } from '../components/Header';
 import { Content } from '../components/Content';
 import { Product } from '../@types/types';
 import { grapQLClient } from '../services/graphiqlClient';

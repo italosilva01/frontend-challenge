@@ -5,16 +5,18 @@ import { CardItemMinInfo } from '../CardItemMinInfo';
 
 import { useProduct } from '../../context/ProductContext';
 import { EmptySearch } from '../EmptySearch';
+import { Product } from '../../@types/types';
 
 interface AllProductsProps {
-  initProducts: object;
+  initProducts: Product[];
 }
 
 export const AllProducts = ({ initProducts }: AllProductsProps) => {
   const { addProducts, products } = useProduct();
 
   useEffect(() => {
-    if (initProducts) addProducts(Object.values(initProducts)[0]);
+    if (initProducts)
+      addProducts(Object.values(initProducts)[0] as unknown as Product[]);
   }, []);
 
   return (
@@ -28,10 +30,10 @@ export const AllProducts = ({ initProducts }: AllProductsProps) => {
           alignItems="center"
           justifyContent="center"
         >
-          {products.length === 0 ? (
+          {products?.length === 0 ? (
             <EmptySearch />
           ) : (
-            products.map(({ name, image_url, price_in_cents, id }, index) => (
+            products?.map(({ name, image_url, price_in_cents, id }, index) => (
               <Grid item key={index} md>
                 <CardItemMinInfo
                   idProduct={id}

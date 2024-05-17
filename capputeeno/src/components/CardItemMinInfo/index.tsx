@@ -29,13 +29,16 @@ export const CardItemMinInfo = ({
           className="border rounded-t-lg"
         />
         <Box className="grid px-3 py-2 gap-y-2">
-          <p className="prose-base font-['Saira'] text-base leading-6 ">
+          <p
+            className="prose-base font-['Saira'] text-base leading-6 "
+            data-testid="product-name"
+          >
             {productName}
           </p>
 
           <div className="w-[14.25rem] h-[1px] border border-[DCE2E5] mx-auto" />
 
-          <p className="font-bold ">
+          <p className="font-bold" data-testid="product-cost">
             {convertCurrencyBRL(Number(numeroComPontoFinal))}
           </p>
         </Box>

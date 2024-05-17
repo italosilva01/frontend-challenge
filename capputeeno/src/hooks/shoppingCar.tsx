@@ -45,11 +45,9 @@ export const ShoppingCarProvider = ({ children }: ShoppingCarProviderProps) => {
   };
 
   const changeQuantityProductCar = (productId: string, newQuantity: number) => {
-    console.log(newQuantity);
     const newQuantityProduct = productsShoppingCar.map((p) =>
       p.id === productId ? { ...p, quantity: newQuantity } : p
     );
-    console.log(newQuantityProduct);
 
     updateProductsShooppingCarAndSessionStorage(newQuantityProduct);
   };
