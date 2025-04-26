@@ -1,6 +1,6 @@
 import React from 'react';
 import { Main } from '../../components/Main';
-import { BackButton } from '../../app/product/components/BackButton';
+import { BackButton } from '../../components/atoms/BackButton';
 import { ProductCard } from './components/ProductCard';
 import { useShoppingCar } from '../../hooks/shoppingCar';
 import { Box, Typography } from '@mui/material';

@@ -5,12 +5,12 @@ import { grapQLClient } from '../../../services/graphiqlClient';
 import { gql } from 'graphql-request';
 import { convertPrice } from '../../../utils';
 import { useShoppingCar } from '../../../hooks/shoppingCar';
-import { BackButton } from '../components/BackButton';
+import { BackButton } from '../../../components/atoms/BackButton';
 import { Box, Typography } from '@mui/material';
 import { convertCurrencyBRL } from '../../../utils/convertCurrencyBRL';
 import Image from 'next/image';
-import { ButtonAddCard } from '../components/ButtonAddCar';
-import { InforProduct } from '../components/InfoProduct';
+import { ButtonAddCard } from '../../../components/atoms/ButtonAddCar';
+import { InforProduct } from '../../../components/molecules/InfoProduct';
 
 
 interface ProductProps {

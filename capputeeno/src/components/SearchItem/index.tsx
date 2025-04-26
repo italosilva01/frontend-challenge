@@ -5,13 +5,13 @@ import { z } from 'zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { grapQLClient } from '../../services/graphiqlClient';
 import { gql } from 'graphql-request';
-import { useProduct } from '../../context/ProductContext';
+import { useProduct } from '../../../styles/context/ProductContext';
 
 const Search = z.object({
   search: z.string(),
 });
 
-interface SearchItemProps {}
+interface SearchItemProps { }
 export const SearchItem = () => {
   type TypeSearch = z.infer<typeof Search>;
   const { register, handleSubmit } = useForm<TypeSearch>();
@@ -44,7 +44,7 @@ export const SearchItem = () => {
         InputProps={{
           endAdornment: (
             <IconButton type="submit">
-              <Image src={'/images/glass.svg'} width={24} height={24} />
+              <Image src={'/images/glass.svg'} width={24} height={24} alt="glass" />
             </IconButton>
           ),
         }}

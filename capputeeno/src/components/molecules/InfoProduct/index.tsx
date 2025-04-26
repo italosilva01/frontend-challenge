@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { DescriptionProduct } from '../DescriptionProduct';
-import { Product } from '../../../../@types/types';
+import { Product } from '../../../@types/types';
 
 interface InforProductProps {
   product: Product;

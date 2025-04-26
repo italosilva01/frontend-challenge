@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -26,6 +26,7 @@ export const CardItemMinInfo = ({
           src={imageUrl}
           width={256}
           height={300}
+          alt={productName}
           className="border rounded-t-lg"
         />
         <Box className="grid px-3 py-2 gap-y-2">
