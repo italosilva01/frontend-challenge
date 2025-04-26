@@ -1,8 +1,12 @@
-'use client'
 import './globals.css'
-import { ProductProvider } from '../../styles/context/ProductContext'
-import { ShoppingCarProvider } from '../hooks/shoppingCar'
 
+import { Metadata } from 'next'
+import { ClientProviders } from './client-providers'
+
+export const metadata: Metadata = {
+    title: 'Capputeeno - Produtos',
+    description: 'Encontre os melhores produtos aqui',
+}
 
 export default function RootLayout({
     children,
@@ -12,11 +16,9 @@ export default function RootLayout({
     return (
         <html lang="pt-BR">
             <body className="font-sans">
-                <ProductProvider>
-                    <ShoppingCarProvider>
-                        {children}
-                    </ShoppingCarProvider>
-                </ProductProvider>
+                <ClientProviders>
+                    {children}
+                </ClientProviders>
             </body>
         </html>
     )

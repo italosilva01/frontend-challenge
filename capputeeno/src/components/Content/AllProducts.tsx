@@ -4,17 +4,18 @@ import { Box, Grid } from '@mui/material';
 
 import { CardItemMinInfo } from '../CardItemMinInfo';
 
-import { EmptySearch } from '../EmptySearch';
+import { EmptySearch } from '../atoms/EmptySearch';
 import { useProduct } from '../../../styles/context/ProductContext';
+import { Product } from '../../@types/types';
 interface AllProductsProps {
-  initProducts: object;
+  initProducts: Product[];
 }
 
 export const AllProducts = ({ initProducts }: AllProductsProps) => {
   const { addProducts, products } = useProduct();
 
   useEffect(() => {
-    if (initProducts) addProducts(Object.values(initProducts)[0]);
+    if (initProducts) addProducts(initProducts);
   }, []);
 
   return (
