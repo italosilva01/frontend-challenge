@@ -1,5 +1,5 @@
 import React, { ReactNode, useState, useContext, createContext } from 'react';
-import { Product } from '../@types/types';
+import { Product } from '../../src/@types/types';
 
 const ProductContext = createContext<ProductContextData>(
   [] as unknown as ProductContextData

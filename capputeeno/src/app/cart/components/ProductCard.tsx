@@ -17,7 +17,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Box className="w-[736px] h-[245px] rounded-md	overflow-hidden bg-white flex gap-x-8 ">
-      <Image src={product.image_url} width={256} height={211} />
+      <Image src={product.image_url} width={256} height={211} alt={product.name} />
 
       <Box className="w-full  text-gray-500   pl-0 p-4 flex flex-col gap-4">
         <Box className="flex justify-between items-center">
@@ -27,7 +27,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               removeCar(product.id);
             }}
           >
-            <img src="/images/trash.svg" />
+            <img src="/images/trash.svg" alt="trash" />
           </IconButton>
         </Box>
 
